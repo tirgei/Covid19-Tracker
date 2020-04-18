@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         items: <BottomNavyBarItem>[
           BottomNavyBarItem(
-            title: Text('General'),
+            title: Text('World'),
             icon: Icon(Icons.home),
           ),
           BottomNavyBarItem(
