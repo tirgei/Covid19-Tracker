@@ -57,12 +57,14 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         items: <BottomNavyBarItem>[
           BottomNavyBarItem(
-            title: Text('World'),
+            title: Text('Summary'),
             icon: Icon(Icons.home),
+            textAlign: TextAlign.center
           ),
           BottomNavyBarItem(
             title: Text('Countries'),
-            icon: Icon(Icons.list)
+            icon: Icon(Icons.list),
+            textAlign: TextAlign.center
           )
         ],
         showElevation: false,
