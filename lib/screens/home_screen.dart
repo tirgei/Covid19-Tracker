@@ -4,6 +4,7 @@ import 'package:covid19/screens/general_statistics_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:flutter_hex_color/flutter_hex_color.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -29,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: HexColor('#F2F3F8'),
       body: SafeArea(
         child: SizedBox.expand(
           child: PageView(

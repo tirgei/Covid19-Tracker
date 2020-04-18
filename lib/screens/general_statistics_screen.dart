@@ -38,6 +38,7 @@ class _GeneralStatisticsScreenState extends State<GeneralStatisticsScreen> {
               SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
                     'World Summary',

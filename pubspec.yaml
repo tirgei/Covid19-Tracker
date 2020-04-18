@@ -28,6 +28,7 @@ dependencies:
   bottom_navy_bar: ^5.4.0
   pie_chart: ^3.1.1
   photo_view: ^0.9.2
+  flutter_hex_color: ^1.0.2
 
 dev_dependencies:
   flutter_test:

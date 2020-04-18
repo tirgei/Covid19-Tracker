@@ -13,6 +13,7 @@ class DataCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
       ),
       shadowColor: Colors.grey[100],
+      elevation: 0.4,
       child: child
     );
   }
