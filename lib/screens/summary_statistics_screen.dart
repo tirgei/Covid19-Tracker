@@ -5,6 +5,7 @@ import 'package:covid19/utils/scroll_behaviour.dart';
 import 'package:covid19/utils/utils.dart';
 import 'package:covid19/widgets/dashboard_card.dart';
 import 'package:covid19/widgets/data_card.dart';
+import 'package:covid19/widgets/loader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -34,7 +35,9 @@ class _SummaryStatisticsScreenState extends State<SummaryStatisticsScreen> {
         switch (snapshot.connectionState) {
           case ConnectionState.active:
           case ConnectionState.waiting:
-            return Text('Loading...');
+            return SummaryStatisticsRoot(
+              child: Loader(),
+            );
 
           case ConnectionState.done:
             if (snapshot.hasError || !snapshot.hasData) {
