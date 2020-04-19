@@ -14,10 +14,10 @@ You can download the apk here: [Covid-19](https://drive.google.com/open?id=1T76d
 - Material Design
 
 ### Screenshots
-|                 |                  | 
-| --------------- | ---------------- |
-| ![Splash Screen](/screenshots/one.jpg) | ![Summary](/screenshots/two.jpg) |
-| ![Countries](/screenshots/three.jpg) | ![Sort countries](/screenshots/four.jpg) |
+|                 |                  |                     |
+| --------------- | ---------------- | ------------------- |
+| ![Splash Screen](/screenshots/one.jpg) | ![Summary](/screenshots/two.jpg) | |
+| ![Countries](/screenshots/three.jpg) | ![Sort countries](/screenshots/four.jpg) | |
 
 ### To Do
 - [ ] Cache Locally
