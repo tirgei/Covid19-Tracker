@@ -54,7 +54,7 @@ class Statistic {
       active: stat['active'],
       recovered: stat['recovered'],
       dead: stat['deaths'],
-      updated: stat['updated']
+      updated: stat['updated'] * 1000
     );
   }
 

@@ -6,6 +6,7 @@ import 'package:covid19/widgets/dashboard_card.dart';
 import 'package:covid19/widgets/data_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class SummaryStatisticsScreen extends StatefulWidget {
@@ -89,7 +90,7 @@ class _SummaryStatisticsScreenState extends State<SummaryStatisticsScreen> {
                   SizedBox(height: 15.0),
                   Align(
                     child: Text(
-                      'Last updated: ${statistic.updated}',
+                      'Last updated: ${DateFormat.yMMMEd().format(DateTime.fromMicrosecondsSinceEpoch(statistic.updated))}',
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey[400]
