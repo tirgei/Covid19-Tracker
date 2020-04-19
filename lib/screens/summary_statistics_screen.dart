@@ -5,6 +5,7 @@ import 'package:covid19/utils/scroll_behaviour.dart';
 import 'package:covid19/utils/utils.dart';
 import 'package:covid19/widgets/dashboard_card.dart';
 import 'package:covid19/widgets/data_card.dart';
+import 'package:covid19/widgets/empty_state.dart';
 import 'package:covid19/widgets/loader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,18 +42,25 @@ class _SummaryStatisticsScreenState extends State<SummaryStatisticsScreen> {
 
           case ConnectionState.done:
             if (snapshot.hasError || !snapshot.hasData) {
-              return Text('Empty state');
+              return emptyState();
             } else {
               return dataView(snapshot.data);
             }
             break;
 
           case ConnectionState.none:
-            return Text('Empty state');
+            return emptyState();
         }
 
-        return Text('Empty state');
+        return emptyState();
       },
+    );
+  }
+
+  // Display empty state
+  Widget emptyState() {
+    return SummaryStatisticsRoot(
+      child: EmptyState(),
     );
   }
 
