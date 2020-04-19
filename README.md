@@ -19,6 +19,14 @@ You can download the apk here: [Covid-19](https://drive.google.com/open?id=1T76d
 | <img src="screenshots/one.jpg" width="300" > | <img src="screenshots/two.jpg" width="300" > | 
 | <img src="screenshots/three.jpg" width="300" > | <img src="screenshots/four.jpg" width="300" > |
 
+### Libraries Used
+- [bottom_navy_bar](https://pub.dev/packages/bottom_navy_bar) - Bottom Navigation Bar
+- [pie_chart](https://pub.dev/packages/pie_chart) - Pie Chart
+- [http](https://pub.dev/packages/http) - HTTP Client
+- [intl](https://pub.dev/packages/intl) - Flutter utils library (e.g. Formatting date)
+- [flutter_money_formatter](https://pub.dev/packages/flutter_money_formatter) - Number formatter to add comma separator
+- [loading](https://pub.dev/packages/loading) - Loading indicator
+
 ### To Do
 - [ ] Cache Locally
 - [ ] Dark Theme
