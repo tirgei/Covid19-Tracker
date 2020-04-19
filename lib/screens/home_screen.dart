@@ -1,6 +1,6 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:covid19/screens/countries_statistics_screen.dart';
-import 'package:covid19/screens/general_statistics_screen.dart';
+import 'package:covid19/screens/summary_statistics_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
               });
             },
             children: <Widget>[
-              GeneralStatisticsScreen(),
+              SummaryStatisticsScreen(),
               CountriesStatisticsScreen()
             ],
           ),

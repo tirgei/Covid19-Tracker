@@ -1,0 +1,192 @@
+import 'package:covid19/data/models/statistic.dart';
+import 'package:covid19/data/network/api_client.dart';
+import 'package:covid19/utils/constants.dart';
+import 'package:covid19/utils/scroll_behaviour.dart';
+import 'package:covid19/widgets/dashboard_card.dart';
+import 'package:covid19/widgets/data_card.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:pie_chart/pie_chart.dart';
+
+class SummaryStatisticsScreen extends StatefulWidget {
+  @override
+  _SummaryStatisticsScreenState createState() => _SummaryStatisticsScreenState();
+}
+
+class _SummaryStatisticsScreenState extends State<SummaryStatisticsScreen> {
+  List<Color> _chartColorList;
+  ApiClient _apiClient;
+
+  @override
+  void initState() {
+    super.initState();
+    _apiClient = ApiClient();
+    _chartColorList = [Constants.ACTIVE_COLOR_CODE, Constants.RECOVERED_COLOR_CODE, Constants.DEAD_COLOR_CODE];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<Statistic>(
+      future: _apiClient.getSummary(),
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.active:
+          case ConnectionState.waiting:
+            return Text('Loading...');
+
+          case ConnectionState.done:
+            if (snapshot.hasError || !snapshot.hasData) {
+              return Text('Empty state');
+            } else {
+              return dataView(snapshot.data);
+            }
+            break;
+
+          case ConnectionState.none:
+            return Text('Empty state');
+        }
+
+        return Text('Empty state');
+      },
+    );
+  }
+
+  // Display data
+  Widget dataView(Statistic statistic) {
+    Map<String, double> data = Map();
+
+    data.putIfAbsent("Active", () => statistic.getActivePercent());
+    data.putIfAbsent("Recovered", () => statistic.getRecoveredPercent());
+    data.putIfAbsent("Dead", () => statistic.getDeathsPercent());
+
+    return SummaryStatisticsRoot(
+      child: Column(
+        children: <Widget>[
+          DataCard(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(10, 20, 10, 15),
+              child: Column(
+                children: <Widget>[
+                  PieChart(
+                    dataMap: data,
+                    chartLegendSpacing: 50.0,
+                    legendPosition: LegendPosition.right,
+                    chartType: ChartType.ring,
+                    showChartValuesOutside: true,
+                    colorList: _chartColorList,
+                    chartRadius: 100.0,
+                    legendStyle: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey[600],
+                      fontWeight: FontWeight.bold,
+                    ),
+                    chartValueStyle: TextStyle(
+                      fontSize: 12,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold
+                    )
+                  ),
+                  SizedBox(height: 15.0),
+                  Align(
+                    child: Text(
+                      'Last updated: ${statistic.updated}',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey[400]
+                      ),
+                    ),
+                    alignment: Alignment.bottomRight,
+                  )
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 10 ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              DashboardCard(
+                icon: 'virus.png',
+                statistic: statistic.cases.toString(),
+                title: 'Cases',
+              ),
+              SizedBox(width: 10.0),
+              DashboardCard(
+                icon: 'death.png',
+                statistic: statistic.dead.toString(),
+                title: 'Dead',
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              DashboardCard(
+                icon: 'patient.png',
+                statistic: statistic.recovered.toString(),
+                title: 'Recovered',
+              ),
+              SizedBox(width: 10.0),
+              DashboardCard(
+                icon: 'cough.png',
+                statistic: statistic.active.toString(),
+                title: 'Active',
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Root layout for Summary screen
+class SummaryStatisticsRoot extends StatelessWidget {
+  final Widget child;
+  
+  SummaryStatisticsRoot({this.child});
+  
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+      child: ScrollConfiguration(
+        behavior: CustomScrollBehaviour(),
+        child: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(),
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'World Summary',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                        letterSpacing: 1.0,
+                        color: Colors.grey[800]
+                      ),
+                    ),
+                    Icon(
+                      Icons.settings,
+                      color: Colors.grey[400],
+                    )
+                  ],
+                ),
+                SizedBox(height: 20.0),
+                child,
+                SizedBox(height: 20.0),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+

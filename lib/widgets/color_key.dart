@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// Widget for displaying color and value combo
+/// Color is shown as a dot while value is text
 class ColorKey extends StatelessWidget {
   final Color color;
   final String value;

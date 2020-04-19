@@ -19,7 +19,7 @@ class _CountriesStatisticsScreenState extends State<CountriesStatisticsScreen> {
     super.initState();
 
     statistics = List.generate(10, (index) =>
-      Statistic(
+      Statistic.country(
         flagUrl: 'https://raw.githubusercontent.com/NovelCOVID/API/master/assets/flags/af.png',
         countryName: 'Afghanistan',
         active: 791,
