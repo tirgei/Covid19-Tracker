@@ -14,14 +14,15 @@ You can download the apk here: [Covid-19](https://drive.google.com/open?id=1T76d
 - Material Design
 
 ### Screenshots
+|                 |                  | 
 | --------------- | ---------------- |
-| <img src="screenshots/one.jpg"> | <img src="screenshots/two.jpg"> |
-| <img src="screenshots/three.jpg"> | <img src="screenshots/four.jpg"> |
+| ![Spash Screen](img src="screenshots/one.jpg") | ![Summary](img src="screenshots/two.jpg") |
+| ![Countries](img src="screenshots/three.jpg") | ![Sort countries](img src="screenshots/four.jpg") |
 
 ### To Do
-[ ] Cache Locally
-[ ] Dark Theme
-[ ] Tests
+- [ ] Cache Locally
+- [ ] Dark Theme
+- [ ] Tests
 
 ### Getting Started with Flutter
 
