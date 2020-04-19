@@ -16,8 +16,8 @@ You can download the apk here: [Covid-19](https://drive.google.com/open?id=1T76d
 ### Screenshots
 |                 |                  | 
 | --------------- | ---------------- |
-| ![Spash Screen](img src="screenshots/one.jpg") | ![Summary](img src="screenshots/two.jpg") |
-| ![Countries](img src="screenshots/three.jpg") | ![Sort countries](img src="screenshots/four.jpg") |
+| ![Splash Screen](/screenshots/one.jpg) | ![Summary](/screenshots/two.jpg) |
+| ![Countries](/screenshots/three.jpg) | ![Sort countries](/screenshots/four.jpg) |
 
 ### To Do
 - [ ] Cache Locally
