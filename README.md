@@ -1,4 +1,6 @@
 # Covid-19
+[![License Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=true)](http://www.apache.org/licenses/LICENSE-2.0)
+
 
 A flutter application to track Covid-19 statistics. The data is fetched from [NovelCovid](https://github.com/NovelCOVID/API) API.
 The design was inspired by [Hasan Aydın](https://dribbble.com/hasanaydins)'s design on [Dribbble](https://dribbble.com/shots/10821409-Corona-Cases-Tracker-App).
@@ -13,13 +15,13 @@ You can download the apk here: [Covid-19](https://drive.google.com/open?id=1T76d
 
 ### Screenshots
 | --------------- | ---------------- |
-| <img src="screenshots/one.png"> | <img src="screenshots/two.png"> |
-| <img src="screenshots/three.png"> | <img src="screenshots/four.png"> |
+| <img src="screenshots/one.jpg"> | <img src="screenshots/two.jpg"> |
+| <img src="screenshots/three.jpg"> | <img src="screenshots/four.jpg"> |
 
 ### To Do
-[] Cache Locally
-[] Dark Theme
-[] Tests
+[ ] Cache Locally
+[ ] Dark Theme
+[ ] Tests
 
 ### Getting Started with Flutter
 
