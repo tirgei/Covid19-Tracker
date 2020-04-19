@@ -44,7 +44,7 @@ class _SummaryStatisticsScreenState extends State<SummaryStatisticsScreen> {
             if (snapshot.hasError || !snapshot.hasData) {
               return emptyState();
             } else {
-              return dataView(snapshot.data);
+              return showData(snapshot.data);
             }
             break;
 
@@ -65,7 +65,7 @@ class _SummaryStatisticsScreenState extends State<SummaryStatisticsScreen> {
   }
 
   // Display data
-  Widget dataView(Statistic statistic) {
+  Widget showData(Statistic statistic) {
     Map<String, double> data = Map();
 
     data.putIfAbsent("Active", () => statistic.getActivePercent());

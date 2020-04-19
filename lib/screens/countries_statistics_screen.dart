@@ -1,7 +1,10 @@
 import 'package:covid19/data/models/statistic.dart';
+import 'package:covid19/data/network/api_client.dart';
 import 'package:covid19/utils/constants.dart';
 import 'package:covid19/utils/scroll_behaviour.dart';
 import 'package:covid19/widgets/color_key.dart';
+import 'package:covid19/widgets/empty_state.dart';
+import 'package:covid19/widgets/loader.dart';
 import 'package:covid19/widgets/statistic_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,23 +15,79 @@ class CountriesStatisticsScreen extends StatefulWidget {
 }
 
 class _CountriesStatisticsScreenState extends State<CountriesStatisticsScreen> {
-  List<Statistic> statistics = List();
+  ApiClient _apiClient;
 
   @override
   void initState() {
     super.initState();
-
-    statistics = List.generate(10, (index) =>
-      Statistic.country(
-        flagUrl: 'https://raw.githubusercontent.com/NovelCOVID/API/master/assets/flags/af.png',
-        countryName: 'Afghanistan',
-        active: 791,
-        recovered: 112,
-        dead: 30
-      )
-    );
-
+    _apiClient = ApiClient();
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<Statistic>>(
+      future: _apiClient.getCountries(),
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.active:
+          case ConnectionState.waiting:
+            return CountriesStatisticsRoot(
+              child: Loader(),
+            );
+
+          case ConnectionState.done:
+            if (snapshot.hasError || !snapshot.hasData) {
+              return emptyState();
+            } else {
+              return showData(snapshot.data);
+            }
+            break;
+
+          case ConnectionState.none:
+            return emptyState();
+        }
+
+        return emptyState();
+      },
+    );
+  }
+
+  // Empty state widget
+  Widget emptyState() {
+    return CountriesStatisticsRoot(
+      child: EmptyState(),
+    );
+  }
+
+  // Data widget
+  Widget showData(List<Statistic> statistics) {
+    return CountriesStatisticsRoot(
+      child: Expanded(
+        child: ScrollConfiguration(
+          behavior: CustomScrollBehaviour(),
+          child: ListView.separated(
+            itemCount: statistics.length,
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+            separatorBuilder: (context, index) => SizedBox(height: 5),
+            itemBuilder: (context, index) {
+              return StatisticCard(
+                statistic: statistics[index],
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Root layout for countries statistics screen
+class CountriesStatisticsRoot extends StatelessWidget {
+  final Widget child;
+
+  CountriesStatisticsRoot({this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -77,25 +136,10 @@ class _CountriesStatisticsScreenState extends State<CountriesStatisticsScreen> {
             ],
           ),
           SizedBox(height: 10),
-          Expanded(
-            child: ScrollConfiguration(
-              behavior: CustomScrollBehaviour(),
-              child: ListView.separated(
-                itemCount: statistics.length,
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                separatorBuilder: (context, index) => SizedBox(height: 5),
-                itemBuilder: (context, index) {
-                  return StatisticCard(
-                    statistic: statistics[index],
-                  );
-                },
-              ),
-            ),
-          ),
+          child
         ],
       ),
     );
   }
 }
+

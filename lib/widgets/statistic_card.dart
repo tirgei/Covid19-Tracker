@@ -1,5 +1,6 @@
 import 'package:covid19/data/models/statistic.dart';
 import 'package:covid19/utils/constants.dart';
+import 'package:covid19/utils/utils.dart';
 import 'package:covid19/widgets/color_key.dart';
 import 'package:covid19/widgets/data_card.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class StatisticCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Image.network(
-                    statistic.flagUrl,
+                    statistic.countryInfo.flagUrl,
                     height: 20,
                     width: 40,
                   ),
@@ -47,15 +48,15 @@ class StatisticCard extends StatelessWidget {
                 children: <Widget>[
                   ColorKey(
                     color: Constants.ACTIVE_COLOR_CODE,
-                    value: statistic.active.toString(),
+                    value: Utils.commaSeparated(statistic.active),
                   ),
                   ColorKey(
                     color: Constants.RECOVERED_COLOR_CODE,
-                    value: statistic.recovered.toString(),
+                    value: Utils.commaSeparated(statistic.recovered),
                   ),
                   ColorKey(
                     color: Constants.DEAD_COLOR_CODE,
-                    value: statistic.dead.toString(),
+                    value: Utils.commaSeparated(statistic.dead),
                   ),
                 ],
               ),

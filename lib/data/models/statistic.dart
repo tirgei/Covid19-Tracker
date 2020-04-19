@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:covid19/data/models/country_info.dart';
+
 /// Data class to hold statistics
 class Statistic {
-  String flagUrl;
+  CountryInfo countryInfo;
   String countryName;
   int active;
   int recovered;
@@ -11,7 +13,7 @@ class Statistic {
   int cases;
 
   /// Country statistics constructor
-  Statistic.country({this.flagUrl, this.countryName, this.active, this.recovered, this.dead});
+  Statistic.country({this.countryInfo, this.countryName, this.active, this.recovered, this.dead});
 
   /// General statistics constructor
   Statistic.summary({this.cases, this.active, this.recovered, this.dead, this.updated});
@@ -32,12 +34,10 @@ class Statistic {
   }
 
   /// Parse JSON data to country statistic
-  static Statistic fromCountryJson(String data) {
-    Map<String, dynamic> countryStat = jsonDecode(data);
-    Map<String, dynamic> countryInfo = jsonDecode(countryStat['countryInfo']);
+  static Statistic fromCountryJson(Map<String, dynamic> countryStat) {
 
     return Statistic.country(
-      flagUrl: countryInfo['flag'],
+      countryInfo: CountryInfo.fromJson(countryStat['countryInfo']),
       countryName: countryStat['country'],
       active: countryStat['active'],
       recovered: countryStat['recovered'],
