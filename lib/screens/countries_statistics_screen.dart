@@ -48,7 +48,7 @@ class _CountriesStatisticsScreenState extends State<CountriesStatisticsScreen> {
             if (snapshot.hasError || !snapshot.hasData) {
               return emptyState();
             } else {
-              return showData(snapshot.data, _sortList);
+              return showData(context, snapshot.data, _sortList);
             }
             break;
 
@@ -69,7 +69,7 @@ class _CountriesStatisticsScreenState extends State<CountriesStatisticsScreen> {
   }
 
   // Data widget
-  Widget showData(List<Statistic> statistics, SortList sortList) {
+  Widget showData(BuildContext context, List<Statistic> statistics, SortList sortList) {
     print('Sorting by: $sortList');
 
     // Sort list first
@@ -109,6 +109,103 @@ class _CountriesStatisticsScreenState extends State<CountriesStatisticsScreen> {
           ),
         ),
       ),
+      sortList: () { sortListDialog(context); },
+    );
+  }
+
+  /// Dialog to select style to sort list by
+  void sortListDialog(BuildContext context) {
+    TextStyle checklistStyle = TextStyle(
+      fontSize: 15,
+      color: Colors.grey[600],
+      letterSpacing: 1
+    );
+
+    Widget dialog = SimpleDialog(
+      title: Text(
+        'Sort Countries List',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 20.0,
+          letterSpacing: 1.0,
+          color: Colors.grey[800]
+        ),
+      ),
+      children: <Widget>[
+        CheckboxListTile(
+          title: Text(
+            'Alphabetical',
+            style: checklistStyle,
+          ),
+          value: _sortList == SortList.alphabetical,
+          onChanged: (value) {
+            if (value) {
+              setState(() {
+                _sortList = SortList.alphabetical;
+              });
+            }
+            Navigator.pop(context); // Close dialog
+          },
+        ),
+        CheckboxListTile(
+          title: Text(
+            'Active cases',
+            style: checklistStyle,
+          ),
+          value: _sortList == SortList.activeCases,
+          onChanged: (value) {
+            if (value) {
+              setState(() {
+                _sortList = SortList.activeCases;
+              });
+            }
+            Navigator.pop(context); // Close dialog
+          },
+        ),
+        CheckboxListTile(
+          title: Text(
+            'Recovered cases',
+            style: checklistStyle,
+          ),
+          value: _sortList == SortList.recoveredCases,
+          onChanged: (value) {
+            if (value) {
+              setState(() {
+                _sortList = SortList.recoveredCases;
+              });
+            }
+            Navigator.pop(context); // Close dialog
+          },
+        ),
+        CheckboxListTile(
+          title: Text(
+            'Dead cases',
+            style: checklistStyle,
+          ),
+          value: _sortList == SortList.deadCases,
+          onChanged: (value) {
+            if (value) {
+              setState(() {
+                _sortList = SortList.deadCases;
+              });
+            }
+            Navigator.pop(context); // Close dialog
+          },
+        ),
+      ],
+      backgroundColor: Colors.white,
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+    );
+
+    showDialog<void>(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return dialog;
+      },
     );
   }
 }
@@ -116,8 +213,9 @@ class _CountriesStatisticsScreenState extends State<CountriesStatisticsScreen> {
 /// Root layout for countries statistics screen
 class CountriesStatisticsRoot extends StatelessWidget {
   final Widget child;
+  final Function sortList;
 
-  CountriesStatisticsRoot({this.child});
+  CountriesStatisticsRoot({this.child, this.sortList});
 
   @override
   Widget build(BuildContext context) {
@@ -139,9 +237,14 @@ class CountriesStatisticsRoot extends StatelessWidget {
                   color: Colors.grey[800]
                 ),
               ),
-              Icon(
-                Icons.filter_list,
-                color: Colors.grey[500],
+              GestureDetector(
+                child: Icon(
+                  Icons.filter_list,
+                  color: Colors.grey[500],
+                ),
+                onTap: () {
+                  sortList();
+                },
               )
             ],
           ),
