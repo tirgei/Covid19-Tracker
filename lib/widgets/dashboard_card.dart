@@ -30,7 +30,7 @@ class DashboardCard extends StatelessWidget {
               Text(
                 statistic,
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.0,
                   color: Colors.grey[800]

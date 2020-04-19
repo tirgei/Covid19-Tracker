@@ -2,6 +2,7 @@ import 'package:covid19/data/models/statistic.dart';
 import 'package:covid19/data/network/api_client.dart';
 import 'package:covid19/utils/constants.dart';
 import 'package:covid19/utils/scroll_behaviour.dart';
+import 'package:covid19/utils/utils.dart';
 import 'package:covid19/widgets/dashboard_card.dart';
 import 'package:covid19/widgets/data_card.dart';
 import 'package:flutter/cupertino.dart';
@@ -108,13 +109,13 @@ class _SummaryStatisticsScreenState extends State<SummaryStatisticsScreen> {
             children: <Widget>[
               DashboardCard(
                 icon: 'virus.png',
-                statistic: statistic.cases.toString(),
+                statistic: Utils.commaSeparated(statistic.cases),
                 title: 'Cases',
               ),
               SizedBox(width: 10.0),
               DashboardCard(
                 icon: 'death.png',
-                statistic: statistic.dead.toString(),
+                statistic: Utils.commaSeparated(statistic.dead),
                 title: 'Dead',
               ),
             ],
@@ -125,13 +126,13 @@ class _SummaryStatisticsScreenState extends State<SummaryStatisticsScreen> {
             children: <Widget>[
               DashboardCard(
                 icon: 'patient.png',
-                statistic: statistic.recovered.toString(),
+                statistic: Utils.commaSeparated(statistic.recovered),
                 title: 'Recovered',
               ),
               SizedBox(width: 10.0),
               DashboardCard(
                 icon: 'cough.png',
-                statistic: statistic.active.toString(),
+                statistic: Utils.commaSeparated(statistic.active),
                 title: 'Active',
               ),
             ],
