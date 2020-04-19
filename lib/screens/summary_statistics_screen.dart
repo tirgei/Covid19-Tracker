@@ -187,7 +187,7 @@ class SummaryStatisticsRoot extends StatelessWidget {
                     ),
                     Icon(
                       Icons.settings,
-                      color: Colors.grey[400],
+                      color: Colors.grey[500],
                     )
                   ],
                 ),

@@ -14,13 +14,22 @@ class CountriesStatisticsScreen extends StatefulWidget {
   _CountriesStatisticsScreenState createState() => _CountriesStatisticsScreenState();
 }
 
+enum SortList {
+  alphabetical,
+  activeCases,
+  recoveredCases,
+  deadCases
+}
+
 class _CountriesStatisticsScreenState extends State<CountriesStatisticsScreen> {
   ApiClient _apiClient;
+  SortList _sortList;
 
   @override
   void initState() {
     super.initState();
     _apiClient = ApiClient();
+    _sortList = SortList.activeCases;
   }
 
   @override
@@ -39,7 +48,7 @@ class _CountriesStatisticsScreenState extends State<CountriesStatisticsScreen> {
             if (snapshot.hasError || !snapshot.hasData) {
               return emptyState();
             } else {
-              return showData(snapshot.data);
+              return showData(snapshot.data, _sortList);
             }
             break;
 
@@ -60,7 +69,28 @@ class _CountriesStatisticsScreenState extends State<CountriesStatisticsScreen> {
   }
 
   // Data widget
-  Widget showData(List<Statistic> statistics) {
+  Widget showData(List<Statistic> statistics, SortList sortList) {
+    print('Sorting by: $sortList');
+
+    // Sort list first
+    switch(sortList) {
+      case SortList.alphabetical:
+        statistics.sort((a, b) => a.countryName.toLowerCase().compareTo(b.countryName.toLowerCase()));
+        break;
+
+      case SortList.activeCases:
+        statistics.sort((a, b) => b.active.compareTo(a.active));
+        break;
+
+      case SortList.recoveredCases:
+        statistics.sort((a, b) => b.recovered.compareTo(a.recovered));
+        break;
+
+      case SortList.deadCases:
+        statistics.sort((a,b) => b.dead.compareTo(a.dead));
+        break;
+    }
+
     return CountriesStatisticsRoot(
       child: Expanded(
         child: ScrollConfiguration(
@@ -110,8 +140,8 @@ class CountriesStatisticsRoot extends StatelessWidget {
                 ),
               ),
               Icon(
-                Icons.search,
-                color: Colors.grey[400],
+                Icons.filter_list,
+                color: Colors.grey[500],
               )
             ],
           ),
