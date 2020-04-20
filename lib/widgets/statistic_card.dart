@@ -27,7 +27,7 @@ class StatisticCard extends StatelessWidget {
                   children: <Widget>[
                     Image.network(
                       statistic.countryInfo.flagUrl,
-                      height: 20,
+                      height: 25,
                       width: 40,
                     ),
                     SizedBox(height: 10),
