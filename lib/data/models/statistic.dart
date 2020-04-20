@@ -13,7 +13,7 @@ class Statistic {
   int cases;
 
   /// Country statistics constructor
-  Statistic.country({this.countryInfo, this.countryName, this.active, this.recovered, this.dead});
+  Statistic.country({this.countryInfo, this.countryName, this.active, this.recovered, this.dead, this.cases, this.updated});
 
   /// General statistics constructor
   Statistic.summary({this.cases, this.active, this.recovered, this.dead, this.updated});
@@ -41,7 +41,9 @@ class Statistic {
       countryName: countryStat['country'],
       active: countryStat['active'],
       recovered: countryStat['recovered'],
-      dead: countryStat['deaths']
+      dead: countryStat['deaths'],
+      cases: countryStat['cases'],
+      updated: countryStat['updated'] * 1000
     );
   }
 
@@ -54,7 +56,7 @@ class Statistic {
       active: stat['active'],
       recovered: stat['recovered'],
       dead: stat['deaths'],
-      updated: stat['updated'] * 1000
+      updated: stat['updated'] * 1000,
     );
   }
 
