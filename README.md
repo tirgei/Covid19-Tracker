@@ -31,6 +31,7 @@ about your device architecture platform:
 - [intl](https://pub.dev/packages/intl) - Flutter utils library (e.g. Formatting date)
 - [flutter_money_formatter](https://pub.dev/packages/flutter_money_formatter) - Number formatter to add comma separator
 - [loading](https://pub.dev/packages/loading) - Loading indicator
+- [fluttertoast](https://pub.dev/packages/fluttertoast) - Toast notifications
 
 ### To Do
 - [ ] Cache Locally
