@@ -33,6 +33,7 @@ dependencies:
   intl: ^0.15.8
   flutter_money_formatter: ^0.8.3
   loading: ^1.0.2
+  fluttertoast: ^4.0.0
 
 dev_dependencies:
   flutter_test:

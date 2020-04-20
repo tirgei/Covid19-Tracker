@@ -185,9 +185,14 @@ class SummaryStatisticsRoot extends StatelessWidget {
                         color: Colors.grey[800]
                       ),
                     ),
-                    Icon(
-                      Icons.settings,
-                      color: Colors.grey[500],
+                    GestureDetector(
+                      child: Icon(
+                        Icons.wb_incandescent,
+                        color: Colors.grey[500],
+                      ),
+                      onTap: () {
+                        Utils.toast('Dark Theme coming soon!');
+                      },
                     )
                   ],
                 ),
