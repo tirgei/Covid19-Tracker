@@ -6,7 +6,11 @@ A flutter application to track Covid-19 statistics. The data is fetched from [No
 The design was inspired by [Hasan Aydın](https://dribbble.com/hasanaydins)'s design on [Dribbble](https://dribbble.com/shots/10821409-Corona-Cases-Tracker-App).
 Image assets in the app are from [Flaticon](https://www.flaticon.com).
 
-You can download the apk here: [Covid-19](https://drive.google.com/open?id=1T76dfLFckjjA61T2P3U6AaJAZ4lB95B2).
+You can download the apk here: [Covid-19](https://drive.google.com/open?id=1y-iucF3mHIvI4QOKd7e0DHJEenE7GNB5) or if you are sure 
+about your device architecture platform:
+- [arm64](https://drive.google.com/open?id=1dxYt2K-tD24f5jZVty0v-eJo_t5p28E-)
+- [armeabi](https://drive.google.com/open?id=1HmtinKFcL4fWPUjtTwDlBEQenTymFYXG)
+- [x86](https://drive.google.com/open?id=1_d8a6l1Mj7BVMBBQ3T4Xcb6R8DGSGS-8)
 
 ### Features
 - Flutter
