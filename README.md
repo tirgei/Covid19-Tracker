@@ -18,6 +18,7 @@ You can download the apk here: [Covid-19](https://drive.google.com/open?id=1T76d
 | --------------- | ---------------- |
 | <img src="screenshots/one.jpg" width="300" > | <img src="screenshots/two.jpg" width="300" > | 
 | <img src="screenshots/three.jpg" width="300" > | <img src="screenshots/four.jpg" width="300" > |
+| <img src="screenshots/five.jpg" width="300" > |
 
 ### Libraries Used
 - [bottom_navy_bar](https://pub.dev/packages/bottom_navy_bar) - Bottom Navigation Bar
