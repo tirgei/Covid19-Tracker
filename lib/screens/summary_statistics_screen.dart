@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:covid19/data/models/statistic.dart';
 import 'package:covid19/data/network/api_client.dart';
 import 'package:covid19/utils/constants.dart';
@@ -20,6 +21,7 @@ class SummaryStatisticsScreen extends StatefulWidget {
 class _SummaryStatisticsScreenState extends State<SummaryStatisticsScreen> {
   List<Color> _chartColorList;
   ApiClient _apiClient;
+  Statistic statistic;
 
   @override
   void initState() {
@@ -30,6 +32,41 @@ class _SummaryStatisticsScreenState extends State<SummaryStatisticsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: Connectivity().onConnectivityChanged,
+      builder: (context, snapshot) {
+        print('Snapshot data: ${snapshot.hasData} & data loaded: ${statistic != null}');
+
+        if(!snapshot.hasData && statistic == null) {
+          return emptyState();
+        }
+
+        switch(snapshot.data) {
+          case ConnectivityResult.mobile:
+          case ConnectivityResult.wifi:
+            if (statistic == null) {
+              return loadData();
+            } else {
+              return showData(statistic);
+            }
+            break;
+
+          case ConnectivityResult.none:
+            if (statistic == null) {
+              return emptyState();
+            } else {
+              return showData(statistic);
+            }
+            break;
+        }
+
+        return emptyState();
+      },
+    );
+
+  }
+
+  Widget loadData() {
     return FutureBuilder<Statistic>(
       future: _apiClient.getSummary(),
       builder: (context, snapshot) {
@@ -44,6 +81,7 @@ class _SummaryStatisticsScreenState extends State<SummaryStatisticsScreen> {
             if (snapshot.hasError || !snapshot.hasData) {
               return emptyState();
             } else {
+              statistic = snapshot.data;
               return showData(snapshot.data);
             }
             break;
